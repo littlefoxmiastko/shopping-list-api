@@ -43,7 +43,7 @@ class ItemController extends BaseController
     /**
      * @param ItemRepository $itemRepository
      * @return Response
-     * @Route(path="/api/items", name="add_item", methods={"GET"})
+     * @Route(path="/api/items", name="fetch_items", methods={"GET"})
      */
     public function getCollection(ItemRepository $itemRepository): Response
     {
@@ -54,7 +54,7 @@ class ItemController extends BaseController
      * @param ItemFacade $itemFacade
      * @param Item $item
      * @return Response
-     * @Route(path="/api/items/{item_id}", name="add_item", methods={"DELETE"})
+     * @Route(path="/api/items/{item_id}", name="remove_item", methods={"DELETE"})
      * @ParamConverter(name="item", options={"id" = "item_id"})
      */
     public function remove(ItemFacade $itemFacade, Item $item): Response
