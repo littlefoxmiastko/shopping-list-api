@@ -24,10 +24,10 @@ class ItemController extends BaseController
     public function add(FormFactoryInterface $formFactoryBuilder, Request $request, ItemFacade $itemFacade): Response
     {
         $itemModel = new InsertItemRequest();
-        $form = $formFactoryBuilder->create(ItemType::class, $itemModel);
+        $form = $formFactoryBuilder->create(ItemType::class, $itemModel, ['method' => 'POST']);
 
         $item = $form->handleRequest($request);
-        if(!$item->isValid()) {
+        if( !$item->isSubmitted() || !$item->isValid()) {
             return $this->buildObjectResponse($this->getErrorsFromForm($form), Response::HTTP_BAD_REQUEST);
         }
 
@@ -39,6 +39,22 @@ class ItemController extends BaseController
 
         return new Response(null, Response::HTTP_CREATED);
     }
+
+    /**
+     * @return Response
+     * @Route(path="/api/items/{item_id}/done", name="done_item", methods={"PATCH"})
+     * @ParamConverter(name="item", options={"id" = "item_id"})
+     */
+    public function edit(ItemFacade $itemFacade, Item $item): Response
+    {
+        $itemFacade->editDoneItem(
+            !$item->isDone(),
+            $item
+        );
+
+        return new Response(null, Response::HTTP_CREATED);
+    }
+
 
     /**
      * @param ItemRepository $itemRepository

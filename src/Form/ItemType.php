@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Form;
 
-use App\Entity\Item;
 use App\Request\InsertItemRequest;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;

@@ -28,6 +28,12 @@ class ItemFacade
         $this->entityManager->flush();
     }
 
+    public function editDoneItem(bool $done, Item $item): void
+    {
+        $item->setDone($done);
+        $this->entityManager->flush();
+    }
+
     public function removeItem(Item $item): void
     {
         $this->entityManager->remove($item);
