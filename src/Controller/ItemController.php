@@ -79,4 +79,17 @@ class ItemController extends BaseController
 
         return new Response(null, Response::HTTP_OK);
     }
+
+    /**
+     * @param ItemFacade $itemFacade
+     * @param Item $item
+     * @return Response
+     * @Route(path="/api/items", name="remove_item", methods={"DELETE"})
+     * @ParamConverter(name="item", options={"id" = "item_id"})
+     */
+    public function removeAll(ItemRepository $itemRepository): Response
+    {
+        $itemRepository->removeAll();
+        return new Response(null, Response::HTTP_OK);
+    }
 }

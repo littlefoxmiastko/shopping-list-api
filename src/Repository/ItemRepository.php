@@ -22,4 +22,11 @@ class ItemRepository extends ServiceEntityRepository
 
         return $qb;
     }
+
+    public function removeAll(): void
+    {
+        $qb = $this->createQueryBuilder('i');
+        $qb->delete(Item::class, 'i');
+        $qb->getQuery()->execute();
+    }
 }
